@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import settings from './settings.json';
+import './SearchResults.css';
 
 const { baseURL, apikey } = settings
 
@@ -26,12 +27,14 @@ function Search (props) {
   useEffect(() => { searchSymbol() }, [props.keywords]);
 
   return (
-    <ul>
+    <ul className="SearchResults">
       {searchResults.map(symbol =>
         <li
           key={symbol}
           style={{ cursor: 'pointer' }}
-          onClick={() => props.onClick(symbol)}>{symbol}</li>
+          onClick={() => props.onClick(symbol)}
+          className="SearchResultsItem"
+        >{symbol}</li>
       )}
     </ul>
   );

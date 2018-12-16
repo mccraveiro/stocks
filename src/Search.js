@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchResults from './SearchResults'
+import './Search.css';
 
 function Search (props) {
   const [inputValue, setInputValue] = useState('');
@@ -18,20 +19,20 @@ function Search (props) {
   }
 
   return (
-    <div>
+    <div className="Search">
       <input
         value={inputValue}
         type="text"
         onChange={(e) => setInputValue(e.target.value)}
         onKeyPress={search}
+        placeholder="Search"
+        className="SearchInput"
       />
 
       <SearchResults
         keywords={searchKeywords}
         onClick={dispatchChoose}
       />
-
-      <hr />
     </div>
   );
 }

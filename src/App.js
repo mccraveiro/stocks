@@ -10,9 +10,11 @@ function App() {
     <div className="App">
       <Search onChoose={(symbol) => setSymbols([...symbols, symbol])} />
 
-      {symbols.map(symbol =>
-        <Quote key={symbol} symbol={symbol} />
-      )}
+      <div className="QuoteList">
+        {symbols.map(symbol =>
+          <Quote key={symbol} symbol={symbol} />
+        )}
+      </div>
     </div>
   );
 }

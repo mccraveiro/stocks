@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import settings from './settings.json';
+import './Quote.css';
 
 const { baseURL, apikey } = settings
 
@@ -16,7 +17,7 @@ function Quote ({ symbol }) {
   useEffect(() => { getPrice() }, [symbol]);
 
   return (
-    <div style={{ border: '1px solid black' }}>
+    <div className="Quote">
       <h1>{ symbol }</h1>
       <h2>{ price }</h2>
     </div>

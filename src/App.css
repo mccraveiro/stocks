@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.QuoteList {
+  display: flex;
+  margin: 0 auto;
+  width: 1000px;
+}
