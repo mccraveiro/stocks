@@ -5,6 +5,18 @@ import './Quote.css';
 
 const { baseURL, apikey } = settings
 
+function getChangeClassName (change) {
+  if (!change) return
+
+  const changeWithoutPercentage = Number(change.slice(0, -1))
+
+  if (changeWithoutPercentage < 0) {
+    return 'NegativeChange'
+  }
+
+  return 'PositiveChange'
+}
+
 function Quote ({ symbol }) {
   const [price, setPrice] = useState('-');
   const [change, setChange] = useState('-');
@@ -22,7 +34,7 @@ function Quote ({ symbol }) {
     <div className="Quote">
       <h1>{ symbol }</h1>
       <h2>{ price }</h2>
-      <h2>{ change }</h2>
+      <h2 className={getChangeClassName(change)}>{ change }</h2>
     </div>
   );
 }

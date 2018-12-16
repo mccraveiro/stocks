@@ -4,6 +4,7 @@
 
 .QuoteList {
   display: flex;
-  margin: 0 auto;
+  justify-content: space-evenly;
+  margin: 40px auto;
   width: 1000px;
 }
