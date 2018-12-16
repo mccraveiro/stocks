@@ -6,12 +6,14 @@ import './Quote.css';
 const { baseURL, apikey } = settings
 
 function Quote ({ symbol }) {
-  const [price, setPrice] = useState('?');
+  const [price, setPrice] = useState('-');
+  const [change, setChange] = useState('-');
 
   async function getPrice () {
     const result = await axios(`${baseURL}?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apikey}`);
     console.log(result)
     setPrice(result.data['Global Quote']['05. price'])
+    setChange(result.data['Global Quote']['10. change percent'])
   }
 
   useEffect(() => { getPrice() }, [symbol]);
@@ -20,6 +22,7 @@ function Quote ({ symbol }) {
     <div className="Quote">
       <h1>{ symbol }</h1>
       <h2>{ price }</h2>
+      <h2>{ change }</h2>
     </div>
   );
 }
