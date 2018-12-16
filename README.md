@@ -4,6 +4,8 @@ This project is a study material on [React Hooks](https://reactjs.org/docs/hooks
 
 Check stocks quotes!
 
+![App screenshot](https://raw.githubusercontent.com/mccraveiro/stocks/master/screenshot.png)
+
 ### Running the project
 
 1. Clone this repository
