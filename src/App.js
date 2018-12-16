@@ -4,7 +4,7 @@ import Quote from './Quote'
 import './App.css';
 
 function App() {
-  const [symbols, setSymbols] = useState(['STNE'])
+  const [symbols, setSymbols] = useState(['STNE', 'HGTX3.SAO'])
 
   return (
     <div className="App">
