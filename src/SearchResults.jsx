@@ -8,7 +8,10 @@ function Search (props) {
   const [searchResults, setSearchResults] = useState([]);
 
   async function searchSymbol () {
-    if (!props.keywords) return
+    if (!props.keywords) {
+      setSearchResults([]);
+      return
+    }
 
     const result = await axios(`${baseURL}?function=SYMBOL_SEARCH&keywords=${props.keywords}&apikey=${apikey}`);
     console.log(result)
