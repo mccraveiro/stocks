@@ -1,9 +1,24 @@
-import React, { useState, useEffect } from 'react';
+/** @jsx jsx */
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { css, jsx } from '@emotion/core';
 import settings from './settings.json';
-import './Quote.css';
 
 const { baseURL, apikey } = settings
+
+const quoteStyle = css`
+  border: 1px solid #ececec;
+  margin: 8px;
+  width: 250px;
+  height: 150px;
+  padding: 20px;
+  text-align: left;
+`
+
+const headerStyle = css`
+  padding: 0;
+  margin: 0;
+`
 
 function getChangeClassName (change) {
   if (!change) return
@@ -11,10 +26,14 @@ function getChangeClassName (change) {
   const changeWithoutPercentage = Number(change.slice(0, -1))
 
   if (changeWithoutPercentage < 0) {
-    return 'NegativeChange'
+    return css`
+      color: red;
+    `
   }
 
-  return 'PositiveChange'
+  return css`
+    color: green;
+  `
 }
 
 function Quote ({ symbol }) {
@@ -31,10 +50,10 @@ function Quote ({ symbol }) {
   useEffect(() => { getPrice() }, [symbol]);
 
   return (
-    <div className="Quote">
-      <h1>{ symbol }</h1>
+    <div css={quoteStyle}>
+      <h1 css={headerStyle}>{ symbol }</h1>
       <h2>{ price }</h2>
-      <h2 className={getChangeClassName(change)}>{ change }</h2>
+      <h2 css={getChangeClassName(change)}>{ change }</h2>
     </div>
   );
 }

@@ -1,7 +1,25 @@
-import React, { useState, useEffect } from 'react';
+/** @jsx jsx */
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { css, jsx } from '@emotion/core';
 import settings from './settings.json';
-import './SearchResults.css';
+
+const listStyle = css`
+  list-style: none;
+  margin: 0 auto;
+  padding: 5px 0;
+  text-align: left;
+  width: 460px;
+`
+
+const resultStyle = css`
+  color: black;
+  padding: 5px 30px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
 
 const { baseURL, apikey } = settings
 
@@ -27,13 +45,13 @@ function Search (props) {
   useEffect(() => { searchSymbol() }, [props.keywords]);
 
   return (
-    <ul className="SearchResults">
+    <ul css={listStyle}>
       {searchResults.map(symbol =>
         <li
           key={symbol}
           style={{ cursor: 'pointer' }}
           onClick={() => props.onClick(symbol)}
-          className="SearchResultsItem"
+          css={resultStyle}
         >{symbol}</li>
       )}
     </ul>
