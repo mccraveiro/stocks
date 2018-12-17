@@ -43,6 +43,11 @@ function Quote ({ symbol }) {
   async function getPrice () {
     const result = await axios(`${baseURL}?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apikey}`);
     console.log(result)
+
+    if (!result.data['Global Quote']) {
+      return
+    }
+
     setPrice(result.data['Global Quote']['05. price'])
     setChange(result.data['Global Quote']['10. change percent'])
   }

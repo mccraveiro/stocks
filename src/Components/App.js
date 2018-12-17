@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { css, jsx, Global } from '@emotion/core';
 import Search from './Search';
 import Quote from './Quote';
@@ -33,13 +33,34 @@ const bodyStyle = css`
 `
 
 function App() {
-  const [symbols, setSymbols] = useState(['STNE', 'HGTX3.SAO'])
+  const [symbols, setSymbols] = useState([]);
+
+  function retriveStorage () {
+    const serializedSymbols = window.localStorage.getItem('symbols');
+
+    if (!serializedSymbols) {
+      return
+    }
+
+    const parsedSymbols = JSON.parse(serializedSymbols);
+
+    setSymbols(parsedSymbols);
+  }
+
+  useEffect(() => { retriveStorage() }, []);
+
+  function addSymbol (symbol) {
+    const newValue = [...symbols, symbol]
+    const serializedSymbols = JSON.stringify(newValue);
+    window.localStorage.setItem('symbols', serializedSymbols);
+    setSymbols(newValue);
+  }
 
   return (
     <div css={appStyle}>
       <Global styles={globalStyle} />
 
-      <Search onChoose={(symbol) => setSymbols([...symbols, symbol])} />
+      <Search onChoose={addSymbol} />
 
       <div css={bodyStyle}>
         {symbols.map(symbol =>
