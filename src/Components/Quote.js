@@ -4,7 +4,7 @@ import axios from 'axios';
 import { css, jsx } from '@emotion/core';
 import settings from '../settings.json';
 
-const { baseURL, apikey } = settings
+const { baseURL, APIKey } = settings
 
 const quoteStyle = css`
   border: 1px solid #ececec;
@@ -41,7 +41,7 @@ function Quote ({ symbol }) {
   const [change, setChange] = useState('-');
 
   async function getPrice () {
-    const result = await axios(`${baseURL}?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apikey}`);
+    const result = await axios(`${baseURL}?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${APIKey}`);
     console.log(result)
 
     if (!result.data['Global Quote']) {

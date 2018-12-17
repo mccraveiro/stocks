@@ -21,7 +21,7 @@ const resultStyle = css`
   }
 `
 
-const { baseURL, apikey } = settings
+const { baseURL, APIKey } = settings
 
 function Search (props) {
   const [searchResults, setSearchResults] = useState([]);
@@ -32,7 +32,7 @@ function Search (props) {
       return
     }
 
-    const result = await axios(`${baseURL}?function=SYMBOL_SEARCH&keywords=${props.keywords}&apikey=${apikey}`);
+    const result = await axios(`${baseURL}?function=SYMBOL_SEARCH&keywords=${props.keywords}&apikey=${APIKey}`);
     console.log(result)
 
     if (!result.data.bestMatches) {
