@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { css, jsx } from '@emotion/core';
-import settings from './settings.json';
+import settings from '../settings.json';
 
 const listStyle = css`
   list-style: none;
