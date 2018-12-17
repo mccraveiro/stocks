@@ -32,27 +32,36 @@ const bodyStyle = css`
   width: 1000px;
 `
 
-function App() {
-  const [symbols, setSymbols] = useState([]);
+const defaultSymbolList = []
 
-  function retriveStorage () {
-    const serializedSymbols = window.localStorage.getItem('symbols');
+function loadData () {
+  const serializedSymbols = window.localStorage.getItem('symbols');
 
-    if (!serializedSymbols) {
-      return
-    }
-
-    const parsedSymbols = JSON.parse(serializedSymbols);
-
-    setSymbols(parsedSymbols);
+  if (!serializedSymbols) {
+    return defaultSymbolList;
   }
 
-  useEffect(() => { retriveStorage() }, []);
+  const parsedSymbols = JSON.parse(serializedSymbols);
+
+  return parsedSymbols;
+}
+
+function saveData (data) {
+  const serializedSymbols = JSON.stringify(data);
+  window.localStorage.setItem('symbols', serializedSymbols);
+}
+
+function App() {
+  const [symbols, setSymbols] = useState(defaultSymbolList);
+
+  useEffect(() => {
+    const data = loadData();
+    setSymbols(data);
+  }, []);
 
   function addSymbol (symbol) {
-    const newValue = [...symbols, symbol]
-    const serializedSymbols = JSON.stringify(newValue);
-    window.localStorage.setItem('symbols', serializedSymbols);
+    const newValue = [...symbols, symbol];
+    saveData(newValue);
     setSymbols(newValue);
   }
 
