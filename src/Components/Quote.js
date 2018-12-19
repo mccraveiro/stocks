@@ -11,7 +11,7 @@ const { baseURL, APIKey } = settings
 const quoteStyle = css`
   border: 1px solid #ececec;
   margin: 8px;
-  width: 250px;
+  width: 315px;
   height: 277px;
   padding: 0;
   text-align: left;
@@ -94,7 +94,7 @@ function Quote ({ symbol }) {
       <h2 css={getChangeClassName(change)}>{ change.toFixed(2) }%</h2>
       <VictoryGroup
         padding={0}
-        width={250}
+        width={315}
         height={200}
         containerComponent={<VictoryContainer responsive={false} />}
       >

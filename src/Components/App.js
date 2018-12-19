@@ -30,6 +30,7 @@ const bodyStyle = css`
   justify-content: space-evenly;
   margin: 40px auto;
   width: 1000px;
+  flex-wrap: wrap;
 `
 
 const defaultSymbolList = []
