@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState, useEffect } from 'react';
+import { useLocalStorage } from 'react-use';
 import { css, jsx, Global } from '@emotion/core';
 import Search from './Search';
 import Quote from './Quote';
@@ -33,44 +33,14 @@ const bodyStyle = css`
   flex-wrap: wrap;
 `
 
-const defaultSymbolList = []
-
-function loadData () {
-  const serializedSymbols = window.localStorage.getItem('symbols');
-
-  if (!serializedSymbols) {
-    return defaultSymbolList;
-  }
-
-  const parsedSymbols = JSON.parse(serializedSymbols);
-
-  return parsedSymbols;
-}
-
-function saveData (data) {
-  const serializedSymbols = JSON.stringify(data);
-  window.localStorage.setItem('symbols', serializedSymbols);
-}
-
 function App() {
-  const [symbols, setSymbols] = useState(defaultSymbolList);
-
-  useEffect(() => {
-    const data = loadData();
-    setSymbols(data);
-  }, []);
-
-  function addSymbol (symbol) {
-    const newValue = [...symbols, symbol];
-    saveData(newValue);
-    setSymbols(newValue);
-  }
+  const [symbols, setSymbols] = useLocalStorage('symbols', []);
 
   return (
     <div css={appStyle}>
       <Global styles={globalStyle} />
 
-      <Search onChoose={addSymbol} />
+      <Search onChoose={(symbol) => setSymbols([...symbols, symbol])} />
 
       <div css={bodyStyle}>
         {symbols.map(symbol =>
